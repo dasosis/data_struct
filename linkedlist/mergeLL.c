@@ -59,7 +59,7 @@ struct node* mergeLL(struct node** a, struct node** b)
             push(&temp,(*b)->data);
             (*b) = (*b) -> next;
         }
-        else if((*a)->data=(*b)->data)
+        else if((*a)->data==(*b)->data)
         {
             push(&temp,(*a)->data);
             (*a) = (*a) -> next;

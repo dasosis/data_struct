@@ -9,8 +9,18 @@ void push(struct node** head, int x)
 {
     struct node* newnode = (struct node*)malloc(sizeof(struct node));
     newnode->data = x;
-    newnode->next = *head;
-    *head = newnode;
+    if(*head==NULL)
+    {
+        *head = newnode;
+        newnode->next = NULL;
+        return;
+    }
+    struct node* temp = *head;
+    while(temp->next!=NULL) {
+        temp=temp->next;
+    } 
+    temp->next = newnode;
+    newnode->next = NULL;
 }
 void display(struct node* head)
 {
@@ -31,9 +41,21 @@ int pop(struct node** head)
         printf("Empty LL\n");
         return 0;
     }
+    if((*head)->next == NULL)
+    {
+        int x = (*head)->data;
+        free(*head);
+        *head = NULL;
+        return x;
+    }
     struct node* temp = *head;
-    *head = (*head)->next;
+    struct node* prev = *head;
+    while(temp->next!=NULL) {
+        prev = temp;
+        temp=temp->next;
+    }
     int x = temp->data;
+    prev->next = NULL;
     free(temp);
     return x;
 }
